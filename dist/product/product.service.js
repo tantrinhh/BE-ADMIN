@@ -45,6 +45,14 @@ let ProductService = class ProductService {
         const updatedProduct = Object.assign(product, updateProductDto);
         return this.productRepository.save(updatedProduct);
     }
+    async reduceQuantity(id, quantity) {
+        const product = await this.findOne(id);
+        if (product.quantity < quantity) {
+            throw new common_1.BadRequestException(`Not enough stock. Only ${product.quantity} items available.`);
+        }
+        product.quantity -= quantity;
+        return this.productRepository.save(product);
+    }
 };
 exports.ProductService = ProductService;
 exports.ProductService = ProductService = __decorate([

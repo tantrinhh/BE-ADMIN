@@ -7,6 +7,13 @@ export declare class UsersController {
     register(createUserDto: CreateUserDto): Promise<{
         message: string;
     }>;
+    login(loginDto: {
+        useremail: string;
+        password: string;
+    }): Promise<{
+        message: string;
+        user: any;
+    }>;
     findAll(): string;
     findOne(id: string): string;
     update(id: string, updateUserDto: UpdateUserDto): string;

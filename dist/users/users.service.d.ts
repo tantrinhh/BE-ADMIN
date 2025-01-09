@@ -8,6 +8,10 @@ export declare class UsersService {
     register(createUserDto: CreateUserDto): Promise<{
         message: string;
     }>;
+    login(useremail: string, password: string): Promise<{
+        message: string;
+        user: any;
+    }>;
     findAll(): string;
     findOne(id: number): string;
     update(id: number, updateUserDto: UpdateUserDto): string;

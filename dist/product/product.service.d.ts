@@ -12,4 +12,5 @@ export declare class ProductService {
         message: string;
     }>;
     update(id: number, updateProductDto: UpdateProductDto): Promise<Product>;
+    reduceQuantity(id: number, quantity: number): Promise<Product>;
 }

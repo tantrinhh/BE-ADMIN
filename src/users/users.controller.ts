@@ -20,6 +20,11 @@ export class UsersController {
     return this.usersService.register(createUserDto);
   }
 
+  @Post('login')
+  async login(@Body() loginDto: { useremail: string; password: string }) {
+    return this.usersService.login(loginDto.useremail, loginDto.password);
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();

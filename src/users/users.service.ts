@@ -38,6 +38,33 @@ export class UsersService {
     return { message: 'User registered successfully' };
   }
 
+  async login(
+    useremail: string,
+    password: string,
+  ): Promise<{ message: string; user: any }> {
+    const user = await this.userRepository.findOne({
+      where: { useremail },
+    });
+
+    if (!user) {
+      throw new BadRequestException('Email not found');
+    }
+
+    // So sánh mật khẩu đã nhập với mật khẩu mã hóa
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      throw new BadRequestException('Invalid password');
+    }
+
+    const { password: _, ...userWithoutPassword } = user;
+
+    return {
+      message: 'Đăng nhập thành công',
+      user: userWithoutPassword,
+    };
+  }
+
   findAll() {
     return `This action returns all users`;
   }

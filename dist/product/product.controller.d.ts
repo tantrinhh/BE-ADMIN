@@ -5,6 +5,7 @@ import { Product } from './entities/product.entity';
 export declare class ProductController {
     private readonly productService;
     constructor(productService: ProductService);
+    reduceQuantity(id: number, quantity: number): Promise<Product>;
     create(createProductDto: CreateProductDto): Promise<Product>;
     findAll(): Promise<Product[]>;
     findOne(id: string): Promise<Product>;

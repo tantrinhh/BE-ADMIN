@@ -21,6 +21,9 @@ let ProductController = class ProductController {
     constructor(productService) {
         this.productService = productService;
     }
+    async reduceQuantity(id, quantity) {
+        return this.productService.reduceQuantity(id, quantity);
+    }
     create(createProductDto) {
         return this.productService.create(createProductDto);
     }
@@ -38,6 +41,14 @@ let ProductController = class ProductController {
     }
 };
 exports.ProductController = ProductController;
+__decorate([
+    (0, common_1.Patch)(':id/reduce-quantity'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('quantity')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:returntype", Promise)
+], ProductController.prototype, "reduceQuantity", null);
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),

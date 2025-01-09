@@ -7,7 +7,7 @@ export declare class CreateProductDto {
     collection: number;
     sizes?: string[];
     colors?: string[];
-    shortdescription?: string;
+    shortdescription: string;
     quantity: number;
-    brand?: string;
+    brand: string;
 }

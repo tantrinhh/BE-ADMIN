@@ -5,6 +5,7 @@ import {
   NotFoundException,
   Param,
   Put,
+  BadRequestException,
 } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -49,5 +50,19 @@ export class ProductService {
     const product = await this.findOne(id);
     const updatedProduct = Object.assign(product, updateProductDto);
     return this.productRepository.save(updatedProduct);
+  }
+  // Thêm phương thức giảm số lượng sản phẩm
+  async reduceQuantity(id: number, quantity: number): Promise<Product> {
+    const product = await this.findOne(id);
+
+    if (product.quantity < quantity) {
+      throw new BadRequestException(
+        `Not enough stock. Only ${product.quantity} items available.`,
+      );
+    }
+
+    // Giảm số lượng
+    product.quantity -= quantity;
+    return this.productRepository.save(product);
   }
 }

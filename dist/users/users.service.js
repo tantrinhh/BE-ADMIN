@@ -40,6 +40,23 @@ let UsersService = class UsersService {
         await this.userRepository.save(user);
         return { message: 'User registered successfully' };
     }
+    async login(useremail, password) {
+        const user = await this.userRepository.findOne({
+            where: { useremail },
+        });
+        if (!user) {
+            throw new common_1.BadRequestException('Email not found');
+        }
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new common_1.BadRequestException('Invalid password');
+        }
+        const { password: _, ...userWithoutPassword } = user;
+        return {
+            message: 'Đăng nhập thành công',
+            user: userWithoutPassword,
+        };
+    }
     findAll() {
         return `This action returns all users`;
     }

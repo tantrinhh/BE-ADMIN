@@ -9,5 +9,5 @@ export declare class CreateProductDto {
     colors?: string[];
     shortdescription: string;
     quantity: number;
-    brand: string;
+    brands?: string;
 }

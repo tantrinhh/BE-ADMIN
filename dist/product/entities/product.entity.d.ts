@@ -10,6 +10,6 @@ export declare class Product {
     colors: string[];
     shortdescription?: string;
     quantity: number;
-    brand?: string;
+    brands: string;
     dateAdded: string;
 }

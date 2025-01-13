@@ -33,5 +33,5 @@ export class CreateProductDto {
   quantity: number;
 
   @IsString()
-  brand: string;
+  brands?: string;
 }

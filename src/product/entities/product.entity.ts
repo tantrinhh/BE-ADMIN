@@ -34,8 +34,8 @@ export class Product {
   @Column()
   quantity: number;
 
-  @Column()
-  brand?: string;
+  @Column({ nullable: true })
+  brands: string;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   dateAdded: string;

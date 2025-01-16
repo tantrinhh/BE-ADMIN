@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateOderDto } from './dto/create-oder.dto';
 import { UpdateOderDto } from './dto/update-oder.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -12,35 +12,38 @@ export class OderService {
     private readonly orderRepository: Repository<Oder>,
   ) {}
 
-  async createOrder(createOrderDto: CreateOderDto): Promise<Oder> {
-    const order = this.orderRepository.create(createOrderDto);
-    return this.orderRepository.save(order);
+  async createOrder(createOderDto: CreateOderDto): Promise<Oder> {
+    const newOrder = this.orderRepository.create(createOderDto);
+    return this.orderRepository.save(newOrder);
   }
-  // findAll() {
-  //   return `This action returns all oder`;
-  // }
 
-  async getBestSellingProducts(): Promise<any> {
+  // Lấy danh sách tất cả các đơn hàng
+  async findAll(): Promise<Oder[]> {
+    return this.orderRepository.find(); // Lấy tất cả bản ghi trong bảng orders
+  }
+
+  async remove(id: number): Promise<void> {
+    const order = await this.orderRepository.findOneBy({ id });
+    if (!order) {
+      throw new NotFoundException(`Order with id ${id} not found`);
+    }
+    await this.orderRepository.remove(order);
+  }
+
+  async getBestSellingProducts() {
     const result = await this.orderRepository
       .createQueryBuilder('order')
-      .select('order.product, SUM(order.totalItem) as totalSold')
-      .groupBy('order.product')
-      .orderBy('totalSold', 'DESC')
-      .limit(5) // Giới hạn số lượng sản phẩm muốn lấy (ví dụ: 5 sản phẩm bán chạy nhất)
+      .leftJoinAndSelect('order.products', 'product') // Giả sử bạn có mối quan hệ giữa bảng orders và products
+      .select('product.productName', 'productName')
+      .addSelect('SUM(order.quantity)', 'totalItem') // Đếm tổng số lượng sản phẩm bán ra
+      .groupBy('product.productName') // Nhóm theo tên sản phẩm
+      .orderBy('totalItem', 'DESC') // Sắp xếp theo tổng số lượng bán ra giảm dần
       .getRawMany();
 
     return result;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} oder`;
-  }
-
   update(id: number, updateOderDto: UpdateOderDto) {
     return `This action updates a #${id} oder`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} oder`;
   }
 }

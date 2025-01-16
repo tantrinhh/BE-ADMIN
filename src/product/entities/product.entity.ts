@@ -31,8 +31,8 @@ export class Product {
   @Column()
   shortdescription?: string;
 
-  @Column()
-  quantity: number;
+  @Column('int', { default: 0 })
+  quantity: number; // Số lượng sản phẩm
 
   @Column({ nullable: true })
   brands: string;

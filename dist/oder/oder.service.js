@@ -21,28 +21,33 @@ let OderService = class OderService {
     constructor(orderRepository) {
         this.orderRepository = orderRepository;
     }
-    async createOrder(createOrderDto) {
-        const order = this.orderRepository.create(createOrderDto);
-        return this.orderRepository.save(order);
+    async createOrder(createOderDto) {
+        const newOrder = this.orderRepository.create(createOderDto);
+        return this.orderRepository.save(newOrder);
+    }
+    async findAll() {
+        return this.orderRepository.find();
+    }
+    async remove(id) {
+        const order = await this.orderRepository.findOneBy({ id });
+        if (!order) {
+            throw new common_1.NotFoundException(`Order with id ${id} not found`);
+        }
+        await this.orderRepository.remove(order);
     }
     async getBestSellingProducts() {
         const result = await this.orderRepository
             .createQueryBuilder('order')
-            .select('order.product, SUM(order.totalItem) as totalSold')
-            .groupBy('order.product')
-            .orderBy('totalSold', 'DESC')
-            .limit(5)
+            .leftJoinAndSelect('order.products', 'product')
+            .select('product.productName', 'productName')
+            .addSelect('SUM(order.quantity)', 'totalItem')
+            .groupBy('product.productName')
+            .orderBy('totalItem', 'DESC')
             .getRawMany();
         return result;
     }
-    findOne(id) {
-        return `This action returns a #${id} oder`;
-    }
     update(id, updateOderDto) {
         return `This action updates a #${id} oder`;
-    }
-    remove(id) {
-        return `This action removes a #${id} oder`;
     }
 };
 exports.OderService = OderService;

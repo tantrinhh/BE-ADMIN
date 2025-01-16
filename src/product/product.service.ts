@@ -53,6 +53,10 @@ export class ProductService {
   }
   // Thêm phương thức giảm số lượng sản phẩm
   async reduceQuantity(id: number, quantity: number): Promise<Product> {
+    if (quantity <= 0) {
+      throw new BadRequestException('Quantity must be greater than zero.');
+    }
+
     const product = await this.findOne(id);
 
     if (product.quantity < quantity) {
@@ -63,6 +67,7 @@ export class ProductService {
 
     // Giảm số lượng
     product.quantity -= quantity;
+
     return this.productRepository.save(product);
   }
 }

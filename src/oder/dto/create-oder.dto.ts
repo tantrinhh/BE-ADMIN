@@ -9,14 +9,6 @@ export class CreateOderDto {
   lastName: string;
 
   @IsString()
-  @IsOptional()
-  companyName?: string;
-
-  @IsString()
-  @IsNotEmpty()
-  country: string;
-
-  @IsString()
   @IsNotEmpty()
   city: string;
 
@@ -38,7 +30,7 @@ export class CreateOderDto {
 
   @IsString()
   @IsNotEmpty()
-  product: string;
+  productName: string;
 
   @IsNumber()
   totalItem: number;

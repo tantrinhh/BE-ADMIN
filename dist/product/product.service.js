@@ -46,6 +46,9 @@ let ProductService = class ProductService {
         return this.productRepository.save(updatedProduct);
     }
     async reduceQuantity(id, quantity) {
+        if (quantity <= 0) {
+            throw new common_1.BadRequestException('Quantity must be greater than zero.');
+        }
         const product = await this.findOne(id);
         if (product.quantity < quantity) {
             throw new common_1.BadRequestException(`Not enough stock. Only ${product.quantity} items available.`);

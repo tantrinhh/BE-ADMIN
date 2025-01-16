@@ -27,14 +27,6 @@ __decorate([
     __metadata("design:type", String)
 ], Oder.prototype, "lastName", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Oder.prototype, "companyName", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Oder.prototype, "country", void 0);
-__decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Oder.prototype, "city", void 0);
@@ -57,7 +49,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Oder.prototype, "product", void 0);
+], Oder.prototype, "productName", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)

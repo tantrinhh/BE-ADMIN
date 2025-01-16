@@ -26,16 +26,6 @@ __decorate([
 ], CreateOderDto.prototype, "lastName", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsOptional)(),
-    __metadata("design:type", String)
-], CreateOderDto.prototype, "companyName", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
-    __metadata("design:type", String)
-], CreateOderDto.prototype, "country", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateOderDto.prototype, "city", void 0);
@@ -63,7 +53,7 @@ __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], CreateOderDto.prototype, "product", void 0);
+], CreateOderDto.prototype, "productName", void 0);
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)

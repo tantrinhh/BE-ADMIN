@@ -6,8 +6,8 @@ export declare class OderController {
     private readonly oderService;
     constructor(oderService: OderService);
     createOder(createOrderDto: CreateOderDto): Promise<Oder>;
-    getBestSellingProducts(): Promise<any>;
-    findOne(id: string): string;
+    findAll(): Promise<Oder[]>;
+    getBestSellingProducts(): Promise<any[]>;
     update(id: string, updateOderDto: UpdateOderDto): string;
-    remove(id: string): string;
+    remove(id: string): Promise<void>;
 }

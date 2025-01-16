@@ -24,11 +24,11 @@ let OderController = class OderController {
     async createOder(createOrderDto) {
         return this.oderService.createOrder(createOrderDto);
     }
+    async findAll() {
+        return this.oderService.findAll();
+    }
     async getBestSellingProducts() {
         return this.oderService.getBestSellingProducts();
-    }
-    findOne(id) {
-        return this.oderService.findOne(+id);
     }
     update(id, updateOderDto) {
         return this.oderService.update(+id, updateOderDto);
@@ -46,18 +46,17 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], OderController.prototype, "createOder", null);
 __decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], OderController.prototype, "findAll", null);
+__decorate([
     (0, common_1.Get)('best-selling'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], OderController.prototype, "getBestSellingProducts", null);
-__decorate([
-    (0, common_1.Get)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], OderController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
     __param(0, (0, common_1.Param)('id')),

@@ -20,16 +20,25 @@ export class OderController {
   async createOder(@Body() createOrderDto: CreateOderDto): Promise<Oder> {
     return this.oderService.createOrder(createOrderDto);
   }
+  @Get()
+  async findAll(): Promise<Oder[]> {
+    return this.oderService.findAll(); // Gọi tới service để trả về danh sách đơn hàng
+  }
 
+  // Thêm phương thức GET để lấy một đơn hàng dựa trên id
+  // @Get(':id')
+  // async findOne(@Param('id') id: string): Promise<Oder> {
+  //   return this.oderService.findOne(id); // Gọi tới service để tìm đơn hàng theo id
+  // }
   @Get('best-selling')
   async getBestSellingProducts() {
     return this.oderService.getBestSellingProducts();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.oderService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.oderService.findOne(+id);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateOderDto: UpdateOderDto) {

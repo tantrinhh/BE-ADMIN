@@ -17,12 +17,6 @@ export class Oder {
   @Column()
   lastName: string;
 
-  @Column({ nullable: true })
-  companyName: string;
-
-  @Column()
-  country: string;
-
   @Column()
   city: string;
 
@@ -39,7 +33,7 @@ export class Oder {
   phone: string;
 
   @Column()
-  product: string;
+  productName: string;
 
   @Column()
   totalItem: number;
@@ -48,5 +42,5 @@ export class Oder {
   totalPrice: number;
 
   @CreateDateColumn()
-  createdAt: Date; // Trường createdAt tự động được gán khi tạo mới bản ghi
+  createdAt: Date;
 }
